@@ -1,8 +1,8 @@
 const service = require("../service/employee.js");
 
-class EmployeeDataController {
+class UserDataController {
   register = (req, res) => {
-    const employeeData = {
+    const userData = {
       fName: req.body.fName,
       lName: req.body.lName,
       email: req.body.email,
@@ -10,7 +10,7 @@ class EmployeeDataController {
       confirmPassword: req.body.confirmPassword,
     };
 
-    service.registerEmployee(employeeData, (error, data) => {
+    service.registerUser(userData, (error, data) => {
       if (error) {
         return res.status(409).json({
           success: false,
@@ -20,7 +20,7 @@ class EmployeeDataController {
       } else {
         return res.status(200).json({
           success: true,
-          message: "Emoloyee has been successfully register",
+          message: "User has been successfully register",
         });
       }
     });
@@ -32,13 +32,13 @@ class EmployeeDataController {
       password: req.body.password,
     };
 
-    service.employeeLogin(loginDetails, (error, data) => {
+    service.loginUser(loginDetails, (error, data) => {
       if (error) {
         return res.status(500).json({ success: false, message: error, data });
       } else {
         return res.status(200).json({
           success: true,
-          message: "Employee logged in successfully",
+          message: "User logged in successfully",
           data,
         });
       }
@@ -46,4 +46,4 @@ class EmployeeDataController {
   };
 }
 
-module.exports = new EmployeeDataController();
+module.exports = new UserDataController();
