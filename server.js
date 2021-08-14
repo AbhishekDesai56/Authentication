@@ -1,3 +1,4 @@
+require("dotenv").config();
 require("./config/connection");
 const express = require("express");
 const app = express();
@@ -11,6 +12,6 @@ app.get("/", (req, res) => {
 
 require("./app/routes/routes.js")(app);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server is listening on port 3000");
 });
