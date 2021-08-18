@@ -1,9 +1,9 @@
 const service = require("../service/user");
-const securePassword = require("../util/securePassword");
+const auth = require("../util/helper");
 
 class UserDataController {
   register = async (req, res) => {
-    const hashedPassword = await securePassword(req.body.password);
+    const hashedPassword = await auth.securePassword(req.body.password);
     const userData = {
       fName: req.body.fName,
       lName: req.body.lName,
@@ -41,7 +41,7 @@ class UserDataController {
         return res.status(200).json({
           success: true,
           message: "User logged in successfully",
-          data,
+          token: auth.generateToken(),
         });
       }
     });
