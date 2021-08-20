@@ -10,8 +10,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Emploee Payroll pages" });
 });
 
-require("./app/routes/routes.js")(app);
+require("./app/routes/routes")(app);
 
-app.listen(process.env.PORT, () => {
+var server = app.listen(process.env.PORT, () => {
   console.log("Server is listening on port 3000");
 });
+
+module.exports = server;
