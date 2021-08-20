@@ -1,3 +1,6 @@
+/* eslint-disable curly */
+/* eslint-disable nonblock-statement-body-position */
+/* eslint-disable indent */
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const auth = require("../util/helper");
@@ -29,17 +32,18 @@ class UserModel {
   loginUser = async (loginData, authenticateUser) => {
     const passwordEnteredByUser = loginData.password;
     const hash = await Userdb.findOne({ email: loginData.email });
-    bcrypt.compare(passwordEnteredByUser, hash.password, (err, isMatch) => {
-      if (err) {
-        throw err;
-      } else if (!isMatch) {
+    if(hash === null)
+      return authenticateUser("Invalid User Credentials", null);
+
+    const isPasswordMatch = await auth.decryptPassword(passwordEnteredByUser, hash.password);
+    if (!isPasswordMatch) {
         return authenticateUser("Password doesn't match!", null);
+      // eslint-disable-next-line no-else-return
       } else {
         Userdb.findOne({ email: loginData.email }, (error, data) => {
           if (error) {
             return authenticateUser(error, null);
           }
-
           if (!data) {
             return authenticateUser("Invalid User Credentials", null);
           }
@@ -47,7 +51,6 @@ class UserModel {
           return authenticateUser(null, token);
         });
       }
-    });
   };
 }
 
