@@ -1,0 +1,55 @@
+{
+	"user":{
+		"register": {
+			"fName":"John",
+			"lName":"Don",
+			"email":"TestJohn1@gmail.com",
+			"password": "123456789",
+			"confirmPassword":"123456789"
+		},
+		"registerUserWithoutFirstname": {
+			"lName":"Don",
+			"email":"John@gmail.com",
+			"password": "123456789",
+			"confirmPassword":"123456789"
+		},
+		"registerUserWithoutLastname": {
+			"fName":"John",
+			"email":"John@gmail.com",
+			"password": "123456789",
+			"confirmPassword":"123456789"
+		},
+		"registerUserWithoutEmail": {
+			"fName":"John",
+			"lName":"Don",
+			"password": "123456789",
+			"confirmPassword":"123456789"
+		},
+		"registerUserWithoutPassword": {
+			"fName":"John",
+			"lName":"Don",
+			"email":"John@gmail.com",
+			"confirmPassword":"123456789"
+		},
+		"registerUserWithoutConfirmPassword": {
+			"fName":"John",
+			"lName":"Don",
+			"email":"John@gmail.com",
+			"password": "123456789"
+		},
+        "login":{
+             "loginUserWithValidCredentials": {
+                "email":"John@gmail.com",
+                "password": "123456789"
+		    },
+            "loginUserWithIncorrectPassword": {
+                "email":"John@gmail.com",
+                "password": "12345678910"
+		    },
+            "loginUserWithInvalidCredentials": {
+                "email":"John12@gmail.com",
+                "password": "123456789101"
+		    }
+        }
+	}
+}
