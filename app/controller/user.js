@@ -1,5 +1,6 @@
 const service = require("../service/user");
 const auth = require("../util/helper");
+const logger = require('logger').createLogger('logger/development.log');
 
 class UserDataController {
   register = async (req, res) => {
@@ -36,6 +37,7 @@ class UserDataController {
 
     service.loginUser(loginDetails, (error, data) => {
       if (error) {
+        logger.error(error);
         return res.status(500).json({ success: false, message: error, data });
       } else {
         return res.status(200).json({
