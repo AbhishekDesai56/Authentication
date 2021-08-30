@@ -43,6 +43,12 @@ class EmployeeModel {
         return error ? saveUserData(error, null) : saveUserData(null, data);
       });
     };
+
+    getAllEmployee = (getEmployees) => {
+      Employeedb.find({}, (error, data) => {
+        return error ? getEmployees(error, null) : getEmployees(null, data);
+      });
+    }
 }
 
 module.exports = new EmployeeModel();
