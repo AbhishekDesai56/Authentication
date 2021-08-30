@@ -22,6 +22,14 @@ class EmployeeService {
       return error ? retrieveEmployeeById(error, null) : retrieveEmployeeById(null, Data);
     });
   }
+
+  updateEmployeeDetails = (employeeId, employeeData) => {
+    try {
+      return model.updateEmployeeDetails(employeeId, employeeData);
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 module.exports = new EmployeeService();
