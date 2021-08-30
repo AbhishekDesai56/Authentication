@@ -22,7 +22,7 @@ class EmployeeController {
       } else {
         return res.status(200).json({
           success: true,
-          message: "User has been successfully register",
+          message: "Employee Data has been save successfully",
         });
       }
     });
@@ -34,12 +34,12 @@ class EmployeeController {
           if (error) {
             return res.status(400).send({
               success: false,
-              message: 'Some error occured'
+              message: 'Error Occured'
             });
           }
           res.status(200).send({
             success: true,
-            message: 'Retrieved Employees',
+            message: 'Fetch all Employees Details',
             data: employeeData
           });
         });
