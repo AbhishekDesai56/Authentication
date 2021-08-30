@@ -10,4 +10,5 @@ module.exports = (app) => {
   app.post('/createEmployee', employee.saveEmployee);
   app.get('/getEmployees', employee.getAllEmployee);
   app.get('/getEmployeeById/:employeeId', employee.getEmployeeById);
+  app.put('/updateEmployeeDetail/:employeeId', employee.updateEmployeeDetail);
 };
