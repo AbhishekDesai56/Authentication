@@ -49,6 +49,12 @@ class EmployeeModel {
         return error ? getEmployees(error, null) : getEmployees(null, data);
       });
     }
+
+    employeeById = (employeeId, getEmployeeById) => {
+      Employeedb.findById(employeeId, (error, data) => {
+        return error ? getEmployeeById(error, null) : getEmployeeById(null, data);
+      });
+    }
 }
 
 module.exports = new EmployeeModel();
