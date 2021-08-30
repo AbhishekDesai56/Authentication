@@ -14,12 +14,6 @@ class EmployeeController {
 
     service.saveEmployee(employeeData, (error, data) => {
       if (error) {
-        return res.status(409).json({
-          success: false,
-          message: "Duplicate Email Address Not Allowed",
-          error,
-        });
-      } else {
         return res.status(200).json({
           success: true,
           message: "Employee Data has been save successfully",
@@ -90,6 +84,31 @@ class EmployeeController {
       });
     } catch (err) {
       res.status(500).send({
+        success: false,
+        message: 'Internal server error found'
+      });
+    }
+  }
+
+   deleteEmployeeById = (req, res) => {
+    try {
+      const employeeId = req.params.employeeId;
+      service.deleteEmployeeById(employeeId, (error, employeeData) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Please check for valid employee id'
+          });
+        } else {
+          return res.status(200).send({
+            success: true,
+            message: 'Employee Deleted Successfully',
+            data: employeeData
+          });
+        }
+      });
+    } catch (error) {
+      return res.status(500).send({
         success: false,
         message: 'Internal server error found'
       });
