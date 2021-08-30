@@ -28,7 +28,7 @@ class EmployeeController {
     });
   }
 
-    getAllEmployee = (req, res) => {
+  getAllEmployee = (req, res) => {
       try {
         service.getAllEmployee((error, employeeData) => {
           if (error) {
@@ -67,6 +67,33 @@ class EmployeeController {
         });
       }
     });
+  }
+
+  updateEmployeeDetail = (req, res) => {
+    try {
+      const employeeId = req.params.employeeId;
+      const updatedEmployeeData = {
+        name: req.body.name,
+        gender: req.body.gender,
+        department: req.body.department,
+        salary: req.body.salary,
+        startDate: req.body.startDate,
+        note: req.body.note,
+      };
+
+      service.updateEmployeeDetails(employeeId, updatedEmployeeData);
+
+      return res.status(200).send({
+        success: true,
+        message: 'Employee record updated successfully',
+        data: updatedEmployeeData
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error found'
+      });
+    }
   }
 }
 
