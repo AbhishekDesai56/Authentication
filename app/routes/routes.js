@@ -11,4 +11,5 @@ module.exports = (app) => {
   app.get('/getEmployees', employee.getAllEmployee);
   app.get('/getEmployeeById/:employeeId', employee.getEmployeeById);
   app.put('/updateEmployeeDetail/:employeeId', employee.updateEmployeeDetail);
+  app.delete('/deleteEmployeeById/:employeeId', employee.deleteEmployeeById);
 };
