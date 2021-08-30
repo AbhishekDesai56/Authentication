@@ -63,6 +63,16 @@ class EmployeeModel {
         return error;
       }
     }
+
+    deleteEmployeeById = (employeeId, deleteEmployeeById) => {
+      try {
+        Employeedb.findByIdAndRemove(employeeId, (error, data) => {
+          return error ? deleteEmployeeById(error, null) : deleteEmployeeById(null, data);
+        });
+      } catch (error) {
+        deleteEmployeeById(error, null);
+      }
+    }
 }
 
 module.exports = new EmployeeModel();
