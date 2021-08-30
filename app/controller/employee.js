@@ -50,6 +50,24 @@ class EmployeeController {
         });
       }
   }
+
+  getEmployeeById = (req, res) => {
+    const employeeId = req.params.employeeId;
+    service.employeeById(employeeId, (error, Data) => {
+      if (error) {
+        return res.status(400).send({
+          success: false,
+          message: 'Record not found'
+        });
+      } else {
+        return res.status(200).send({
+          success: true,
+          message: 'Record found successfully',
+          data: Data
+        });
+      }
+    });
+  }
 }
 
 module.exports = new EmployeeController();
