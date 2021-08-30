@@ -10,6 +10,12 @@ class EmployeeService {
       }
     });
   };
+
+  getAllEmployee = (getEmployees) => {
+    model.getAllEmployee((error, data) => {
+      return error ? getEmployees(error, null) : getEmployees(null, data);
+    });
+  }
 }
 
 module.exports = new EmployeeService();
