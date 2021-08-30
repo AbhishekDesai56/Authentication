@@ -27,3 +27,22 @@ const employeeSchema = mongoose.Schema({
 });
 
 const Employeedb = mongoose.model("employee", employeeSchema);
+
+class EmployeeModel {
+    saveEmployee = (employeeDetails, saveUserData) => {
+      const newEmployeeData = new Employeedb({
+        name: employeeDetails.name,
+        gender: employeeDetails.gender,
+        department: employeeDetails.department,
+        salary: employeeDetails.salary,
+        startDate: employeeDetails.startDate,
+        note: employeeDetails.note,
+      });
+
+      newEmployeeData.save((error, data) => {
+        return error ? saveUserData(error, null) : saveUserData(null, data);
+      });
+    };
+}
+
+module.exports = new EmployeeModel();
