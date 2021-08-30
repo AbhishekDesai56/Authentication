@@ -55,6 +55,14 @@ class EmployeeModel {
         return error ? getEmployeeById(error, null) : getEmployeeById(null, data);
       });
     }
+
+    updateEmployeeDetails = async (employeeId, employeeDetails) => {
+      try {
+        return await Employeedb.findByIdAndUpdate(employeeId, employeeDetails);
+      } catch (error) {
+        return error;
+      }
+    }
 }
 
 module.exports = new EmployeeModel();
