@@ -1,6 +1,7 @@
-const service = require("../service/user");
+const service = require("../service/employee");
 
 class EmployeeController {
+  
   saveEmployee = (req, res) => {
     const employeeData = {
       name: req.body.name,
@@ -11,7 +12,7 @@ class EmployeeController {
       note: req.body.note,
     };
 
-    service.saveEmployee(saveEmployee, (error, data) => {
+    service.saveEmployee(employeeData, (error, data) => {
       if (error) {
         return res.status(409).json({
           success: false,
@@ -24,5 +25,31 @@ class EmployeeController {
           message: "User has been successfully register",
         });
       }
-  };
+    });
+  }
+
+    getAllEmployee = (req, res) => {
+      try {
+        service.getAllEmployee((error, employeeData) => {
+          if (error) {
+            return res.status(400).send({
+              success: false,
+              message: 'Some error occured'
+            });
+          }
+          res.status(200).send({
+            success: true,
+            message: 'Retrieved Employees',
+            data: employeeData
+          });
+        });
+      } catch (error) {
+        return res.send(500).send({
+          success: false,
+          message: error.message
+        });
+      }
+  }
 }
+
+module.exports = new EmployeeController();
