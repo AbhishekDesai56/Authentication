@@ -9,4 +9,5 @@ module.exports = (app) => {
   // employee CRUD api
   app.post('/createEmployee', employee.saveEmployee);
   app.get('/getEmployees', employee.getAllEmployee);
+  app.get('/getEmployeeById/:employeeId', employee.getEmployeeById);
 };
