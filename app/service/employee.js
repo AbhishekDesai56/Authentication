@@ -30,6 +30,17 @@ class EmployeeService {
       return error;
     }
   }
+
+  deleteEmployeeById = (employeeId, deleteEmployeeById) => {
+    try {
+      model.deleteEmployeeById(employeeId, (error, data) => {
+        return error ? deleteEmployeeById(error, null) : deleteEmployeeById(null, data);
+      });
+    } catch (error) {
+      return deleteEmployeeById(error, null);
+    }
+  }
 }
+
 
 module.exports = new EmployeeService();
