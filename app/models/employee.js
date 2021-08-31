@@ -29,7 +29,7 @@ const employeeSchema = mongoose.Schema({
 const Employeedb = mongoose.model("employee", employeeSchema);
 
 class EmployeeModel {
-    saveEmployee = (employeeDetails, saveUserData) => {
+    saveEmployee = (employeeDetails, saveemployeeData) => {
       const newEmployeeData = new Employeedb({
         name: employeeDetails.name,
         gender: employeeDetails.gender,
@@ -40,9 +40,9 @@ class EmployeeModel {
       });
 
       newEmployeeData.save((error, data) => {
-        return error ? saveUserData(error, null) : saveUserData(null, data);
+        return error ? saveemployeeData(error, null) : saveemployeeData(null, data);
       });
-    };
+    }
 
     getAllEmployee = (getEmployees) => {
       Employeedb.find({}, (error, data) => {
