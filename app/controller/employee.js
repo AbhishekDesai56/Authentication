@@ -14,6 +14,12 @@ class EmployeeController {
 
     service.saveEmployee(employeeData, (error, data) => {
       if (error) {
+        return res.status(400).json({
+          success: false,
+          message: "Error Occured",
+          error,
+        });
+      } else {
         return res.status(201).json({
           success: true,
           message: "Employee Data has been save successfully",
