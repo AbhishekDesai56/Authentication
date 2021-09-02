@@ -109,7 +109,6 @@ class EmployeeController {
           return res.status(200).send({
             success: true,
             message: 'Employee Deleted Successfully',
-            data: employeeData
           });
         }
       });
