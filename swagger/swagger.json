@@ -1,26 +1,28 @@
+  
 {
-  "swagger": "2.0",
-  "info": {
-      "title": "Sample API",
-      "description": "API Description For User",
-      "version": "1.0.0"
-  },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "schemes": [
-      "http"
-  ],
-  "consumes": [
-      "application/json"
-  ],
-  "produces": [
-      "application/json"
-  ],
-  "paths": {
-      "/register": {
+    "swagger": "2.0",
+    "info": {
+        "title": "Sample API",
+        "description": "API Description For User",
+        "version": "1.0.0"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/register": {
           "post": {
-              "summary": "New user registration",
-              "parameters": [
+            "tags": ["Register"],
+            "summary": "New user registration",
+            "parameters": [
                   {
                       "in": "body",
                       "name": "Register",
@@ -31,64 +33,237 @@
                   }
               ],
               "responses": {
-                  "200": {
+                  "201": {
                       "description": "User has been successfully register"
                   }
               }
           }
       },
-       "/login": {
+        "/login": {
           "post": {
-              "summary": "Autheniticate User",
-              "parameters": [
-                  {
-                      "in": "body",
-                      "name": "Login",
-                      "schema": {
-                          "$ref": "#/definitions/UserCredentials"
-                      },
-                      "description": "Validating the valid user"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "User logged in successfully"
-                  }
-              }
-          }
-      }
-    },
-      "definitions": {
-        "User": {
-            "type": "object",
-            "properties": {
-                "fName": {
-                    "type": "string"
-                },
-                "lName": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "confirmPassword": {
-                    "type": "string"
+            "tags": ["Login"],
+            "summary": "Autheniticate User",
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "Login",
+                    "schema": {
+                        "$ref": "#/definitions/UserCredentials"
+                    },
+                    "description": "Validating the valid user"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "User logged in successfully"
                 }
             }
-        },
-        "UserCredentials": {
-            "type": "object",
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                }
-            }    
         }
+      },
+    "/createEmployee": {
+      "post": {
+        "tags": ["Create Employee"],
+        "summary": "Create new employee",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Create Employee",
+            "schema": {
+                "$ref": "#/definitions/Employee"
+            },
+            "description": "Creating a new employee"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Employee Data has been save successfully"
+          },
+          "400": {
+              "description": "Error Occured"
+          }
+        },
+        "security":[
+          {
+            "JWT":[]
+          }
+        ]
+      }
+    },
+    "/getEmployees": {
+      "get": {
+        "tags": ["Get All Employees Details"],
+        "summary": "Fetch all employees details",
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch all employees details"
+          },
+          "400": {
+              "description": "Error Occured"
+          }
+        },
+        "security":[
+          {
+            "JWT":[]
+          }
+        ]
+      }
+    },
+
+    "/getEmployeeById/{employeeId}":{
+      "get": {
+        "tags": ["Get Employee By Id"],
+        "summary": "Get employee by Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "employeeId",
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record found successfully"
+          },
+          "400": {
+            "description":"Record not found"
+          }
+      },
+      "security":[
+        {
+          "JWT":[]
+        }
+      ]
     }
+  },
+  "/updateEmployeeDetail/{employeeId}":{
+    "put":{
+      "tags": ["Update Employee"],
+      "summary": "Update Employee Details",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "employeeId",
+          "type":"string"
+        },
+        {
+          "in": "body",
+          "name": "Update Employee Details",
+          "schema": {
+            "$ref": "#/definitions/Employee"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Employee record updated successfully"
+        },
+        "500":{
+          "description":"Internal server error found"        
+        }
+    },
+    "security":[
+      {
+        "JWT":[]
+      }
+    ]
+  }
+},
+
+"/deleteEmployeeById/{employeeId}":{
+  "delete":{
+    "tags": ["Delete Employee"],
+    "summary": "Delete Employee Details",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "employeeId",
+        "type":"string"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Employee Deleted Successfully"
+      },
+      "400": {
+        "description":"Please check for valid employee id"
+      },
+      "500":{
+        "description":"Internal server error found"        
+      }
+    },
+    "security":[
+      {
+        "JWT":[]
+      }
+    ]
+  }
+}
+},
+    
+"securityDefinitions":{
+  "JWT":{
+    "type": "apiKey",
+    "name": "token",
+    "in":"Headers"
+  }
+},
+
+"definitions": {
+    "User": {
+        "type": "object",
+        "properties": {
+            "fName": {
+                "type": "string"
+            },
+            "lName": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "confirmPassword": {
+                "type": "string"
+            }
+        }
+    },
+    "Employee":{
+        "type":"object",
+        "properties":{
+            "name": {
+                "type": "string"
+            },
+            "gender": {
+                "type": "string"
+            },
+            "department": {
+                "type": "array"
+            },
+            "salary": {
+                "type": "string"
+            },
+            "startDate": {
+                "type": "string"
+            },
+            "note": {
+                "type": "string"
+            }
+        }
+    },
+   "UserCredentials": {
+        "type": "object",
+        "properties": {
+            "email": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            }
+        }    
+    }
+  }
 }
