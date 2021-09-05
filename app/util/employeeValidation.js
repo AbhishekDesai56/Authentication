@@ -2,7 +2,7 @@ const joi = require("joi");
 
 const validation = joi.object({
   name: joi.string().pattern(new RegExp("^[A-Z]{1}[a-z]{2,}$")).required(),
-  gender: joi.any().valid("Male", "Female").error(() => 'Gender should be Male (or) Female'),
+  gender: joi.any().valid("Male", "Female"),
   department: joi.array().items(joi.string()),
   salary: joi.string().required(),
   startDate: joi.string().required(),
@@ -24,8 +24,9 @@ const employeeValidation = (req, res, next) => {
       message: "Error in User Data",
       error,
     });
+  } else {
+    next();
   }
-  next();
 };
 
 module.exports = employeeValidation;
