@@ -10,8 +10,8 @@ module.exports = (app) => {
 
   // employee CRUD api
   app.post('/createEmployee', [auth.verifyToken, employeeValidation], employee.saveEmployee);
-  app.get('/getEmployees', [auth.verifyToken, employeeValidation], employee.getAllEmployee);
-  app.get('/getEmployeeById/:employeeId', [auth.verifyToken, employeeValidation], employee.getEmployeeById);
+  app.get('/getEmployees', auth.verifyToken, employee.getAllEmployee);
+  app.get('/getEmployeeById/:employeeId', auth.verifyToken, employee.getEmployeeById);
   app.put('/updateEmployeeDetail/:employeeId', [auth.verifyToken, employeeValidation], employee.updateEmployeeDetail);
-  app.delete('/deleteEmployeeById/:employeeId', [auth.verifyToken, employeeValidation], employee.deleteEmployeeById);
+  app.delete('/deleteEmployeeById/:employeeId', auth.verifyToken, employee.deleteEmployeeById);
 };
