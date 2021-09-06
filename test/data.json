@@ -3,7 +3,7 @@
 		"register": {
 			"fName":"John",
 			"lName":"Don",
-			"email":"TestJohn1@gmail.com",
+			"email":"TestJohn2@gmail.com",
 			"password": "123456789",
 			"confirmPassword":"123456789"
 		},
@@ -50,6 +50,83 @@
                 "email":"John12@gmail.com",
                 "password": "123456789101"
 		    }
-        }
+        },
+
+		"employee": {
+			"employeeDetails":{
+				"name":"Willson D",
+				"gender": "Male",
+				"department":["HR"],
+				"salary":"500000",
+				"startDate":"30 Oct 2021",
+				"note":"He is HR"
+			},
+
+			"employeeDetailsWithNoName":{
+				"gender": "Male",
+				"department":["HR"],
+				"salary":"500000",
+				"startDate":"30 Oct 2021",
+				"note":"He is HR"
+			},
+			
+			"employeeDetailsWithNoGender":{
+				"name":"Willson D",
+				"department":["HR"],
+				"salary":"500000",
+				"startDate":"30 Oct 2021",
+				"note":"He is HR"
+			},
+
+			"employeeDetailsWithNoProperFormatGender":{
+				"name":"Willson D",
+				"gender": "male",
+				"department":["HR"],
+				"salary":"500000",
+				"startDate":"30 Oct 2021",
+				"note":"He is HR"
+			},
+
+			"employeeDetailsWithNoDepartment":{
+				"name":"Willson D",
+				"gender": "male",
+				"salary":"500000",
+				"startDate":"30 Oct 2021",
+				"note":"He is HR"
+			},
+
+			"employeeDetailsWithNoSalary":{
+				"name":"Willson D",
+				"gender": "male",
+				"department":["HR"],
+				"startDate":"30 Oct 2021",
+				"note":"He is HR"
+			},
+			
+			"employeeDetailsWithNoStartDate":{
+				"name":"Willson D",
+				"gender": "male",
+				"department":["HR"],
+				"salary":"500000",
+				"note":"He is HR"
+			},
+
+			"employeeId":{
+        		"id":"6135748074f2a4238cc8eb40"
+    		},
+
+			"incorrectEmployeeId":{
+        		"id":"6135748074f2a4238cc8eb4"
+    		},
+
+			"updateEmployeeDetails":{
+				"name": "Nan",
+				"gender": "Male",
+				"department": ["HR"],
+				"salary": "500000",
+				"startDate": "30 Oct 2020",
+				"note": "Nan is name"
+			}
+		}
 	}
 }
