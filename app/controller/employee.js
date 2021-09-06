@@ -2,7 +2,7 @@ const service = require("../service/employee");
 
 class EmployeeController {
   
-  saveEmployee = (req, res) => {
+  saveEmployee =  (req, res) => {
     const employeeData = {
       name: req.body.name,
       gender: req.body.gender,
@@ -11,21 +11,34 @@ class EmployeeController {
       startDate: req.body.startDate,
       note: req.body.note,
     };
-
-    service.saveEmployee(employeeData, (error, data) => {
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: "Error Occured",
-          error,
-        });
-      } else {
-        return res.status(201).json({
-          success: true,
-          message: "Employee Data has been save successfully",
-        });
-      }
+    
+    return new Promise((resolve, reject) => {
+      service.saveEmployee(employeeData, (error, data) => {
+        if (error) return reject(res.status(400).json({
+           success: false,
+           message: "Error Occured",
+           error
+         }));
+        resolve(res.status(201).json({
+           success: true,
+           message: "Employee Data has been save successfully",
+         }));
+      });
     });
+    // service.saveEmployee(employeeData, (error, data) => {
+    //   if (error) {
+    //     return res.status(400).json({
+    //       success: false,
+    //       message: "Error Occured",
+    //       error,
+    //     });
+    //   } else {
+    //     return res.status(201).json({
+    //       success: true,
+    //       message: "Employee Data has been save successfully",
+    //     });
+    //   }
+    // });
   }
 
   getAllEmployee = (req, res) => {
@@ -81,12 +94,18 @@ class EmployeeController {
         note: req.body.note,
       };
 
-      service.updateEmployeeDetails(employeeId, updatedEmployeeData);
-
-      return res.status(200).send({
-        success: true,
-        message: 'Employee record updated successfully',
-        data: updatedEmployeeData
+      service.updateEmployeeDetails(employeeId, (error,updatedEmployeeData) => {
+         if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Please check for valid employee id'
+          });
+        } else {
+           return res.status(200).send({
+            success: true,
+            message: 'Employee Deleted Successfully',
+          });
+        } 
       });
     } catch (err) {
       res.status(500).send({
@@ -106,7 +125,7 @@ class EmployeeController {
             message: 'Please check for valid employee id'
           });
         } else {
-          return res.status(200).send({
+          return res.status(204).send({
             success: true,
             message: 'Employee Deleted Successfully',
           });
