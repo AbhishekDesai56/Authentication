@@ -94,7 +94,7 @@ class EmployeeController {
         note: req.body.note,
       };
 
-      service.updateEmployeeDetails(employeeId, (error,updatedEmployeeData) => {
+      service.updateEmployeeDetails(employeeId,updatedEmployeeData, (error,data) => {
          if (error) {
           return res.status(400).send({
             success: false,
@@ -103,7 +103,7 @@ class EmployeeController {
         } else {
            return res.status(200).send({
             success: true,
-            message: 'Employee Deleted Successfully',
+            message: 'Employee record updated successfully',
           });
         } 
       });
@@ -118,7 +118,7 @@ class EmployeeController {
    deleteEmployeeById = (req, res) => {
     try {
       const employeeId = req.params.employeeId;
-      service.deleteEmployeeById(employeeId, (error, employeeData) => {
+      service.deleteEmployeeById(employeeId, (error, data) => {
         if (error) {
           return res.status(400).send({
             success: false,
