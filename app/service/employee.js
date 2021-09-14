@@ -18,17 +18,15 @@ class EmployeeService {
   }
 
   employeeById = (employeeId, retrieveEmployeeById) => {
-    model.employeeById(employeeId, (error, Data) => {
+    model.employeeById(employeeId, (error, data) => {
       return error ? retrieveEmployeeById(error, null) : retrieveEmployeeById(null, Data);
     });
   }
 
-  updateEmployeeDetails = (employeeId, employeeData) => {
-    try {
-      return model.updateEmployeeDetails(employeeId, employeeData);
-    } catch (error) {
-      return error;
-    }
+  updateEmployeeDetails = (employeeId, employeeData, updateEmployee) => {
+    model.updateEmployeeDetails(employeeId, employeeData, (err, data) => {
+      return err ? updateEmployee(err, null) : updateEmployee(null, data);
+    });
   }
 
   deleteEmployeeById = (employeeId, deleteEmployeeById) => {
