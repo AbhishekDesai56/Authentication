@@ -56,12 +56,10 @@ class EmployeeModel {
       });
     }
 
-    updateEmployeeDetails = async (employeeId, employeeDetails) => {
-      try {
-        return await Employeedb.findByIdAndUpdate(employeeId, employeeDetails);
-      } catch (error) {
-        return error;
-      }
+    updateEmployeeDetails =  (employeeId, employeeDetails, updateEmployee) => {
+      Employeedb.findByIdAndUpdate(employeeId, employeeDetails, (err, data) => {
+          return err ? updateEmployee(err, null) : updateEmployee(null, data);
+      });
     }
 
     deleteEmployeeById = (employeeId, deleteEmployeeById) => {
