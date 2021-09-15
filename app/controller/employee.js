@@ -66,7 +66,7 @@ class EmployeeController {
 
   getEmployeeById = (req, res) => {
     const employeeId = req.params.employeeId;
-    service.employeeById(employeeId, (error, Data) => {
+    service.employeeById(employeeId, (error, data) => {
       if (error) {
         return res.status(400).send({
           success: false,
@@ -76,7 +76,7 @@ class EmployeeController {
         return res.status(200).send({
           success: true,
           message: 'Record found successfully',
-          data: Data
+          data: data
         });
       }
     });
