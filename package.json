@@ -27,7 +27,10 @@
     "joi-password": "^1.6.0",
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5"
+    "logger": "^0.0.1",
+    "mongoose": "^5.13.5",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.29.2",
