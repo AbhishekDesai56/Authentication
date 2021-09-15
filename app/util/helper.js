@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 class Helper {
   // eslint-disable-next-line class-methods-use-this
   generateToken(data) {
-    return jwt.sign({ data }, process.env.TOKEN_KEY, { expiresIn: "60s" });
+    return jwt.sign({ data }, process.env.TOKEN_KEY, { expiresIn: "30m" });
   }
 
   securePassword = async (password) => {
