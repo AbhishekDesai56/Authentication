@@ -19,7 +19,7 @@ class EmployeeService {
 
   employeeById = (employeeId, retrieveEmployeeById) => {
     model.employeeById(employeeId, (error, data) => {
-      return error ? retrieveEmployeeById(error, null) : retrieveEmployeeById(null, Data);
+      return error ? retrieveEmployeeById(error, null) : retrieveEmployeeById(null, data);
     });
   }
 
