@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const logger = require('logger').createLogger('logger/development.log');
 
 const employeeSchema = mongoose.Schema({
   name: {
@@ -68,6 +69,7 @@ class EmployeeModel {
           return error ? deleteEmployeeById(error, null) : deleteEmployeeById(null, data);
         });
       } catch (error) {
+        logger.error(`deleteEmployeeById method model error ${error}`);
         deleteEmployeeById(error, null);
       }
     }

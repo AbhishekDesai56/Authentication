@@ -1,4 +1,5 @@
 const model = require("../models/employee");
+const logger = require('logger').createLogger('logger/development.log');
 
 class EmployeeService {
   saveEmployee = (employeeData, saveEmployeeData) => {
@@ -35,6 +36,7 @@ class EmployeeService {
         return error ? deleteEmployeeById(error, null) : deleteEmployeeById(null, data);
       });
     } catch (error) {
+      logger.error('Error in deleteEmployeeById method in service file');
       return deleteEmployeeById(error, null);
     }
   }
