@@ -267,25 +267,26 @@ describe('Employee_Token_Generation', () => {
     it('update_employee_details', (done) => {
       const employeeId = userData.user.employee.employeeId.id;
       const { updateEmployeeDetails } = userData.user.employee;
-      chai.request(server).put(`/updateEmployeeDetail/${employeeId}`).set('token', token).send(updateEmployeeDetails)
+      chai.request(server)
+        .put(`/updateEmployeeDetail/${employeeId}`)
+        .set('token', token)
+        .send(updateEmployeeDetails)
         .end((error, res) => {
           res.should.have.status(200);
           res.body.should.have.property('success').eql(true);
           res.body.should.have.property('message').eql('Employee record updated successfully');
-          res.body.should.have.property('data');
           done();
         });
     });
 
     it('update_employee_details_incorrectId', (done) => {
       const employeeId = userData.user.employee.incorrectEmployeeId.id;
-      const updateEmployeeDetails = userData.user.employee.updateEmployeeDetails;
+      const {updateEmployeeDetails} = userData.user.employee;
       chai.request(server).put(`/updateEmployeeDetail/${employeeId}`).set('token', token).send(updateEmployeeDetails)
         .end((error, res) => {
-          res.should.have.status(500);
+          res.should.have.status(400);
           res.body.should.have.property('success').eql(false);
-          res.body.should.have.property('message').eql('Record not found');
-          res.body.should.have.property('data');
+          res.body.should.have.property('message').eql('Please check for valid employee id');
           done();
         });
     });
