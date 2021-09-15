@@ -23,5 +23,4 @@ const server = app.listen(process.env.PORT, () => {
 });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 module.exports = server;

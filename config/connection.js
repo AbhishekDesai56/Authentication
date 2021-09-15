@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const logger = require('logger').createLogger('logger/development.log');
 
 mongoose.Promise = global.Promise;
-
 mongoose
   .connect(dbConfig.url, { useNewUrlParser: true })
   .then(() => {
