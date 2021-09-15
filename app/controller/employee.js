@@ -1,4 +1,5 @@
 const service = require("../service/employee");
+const logger = require('logger').createLogger('logger/development.log');
 
 class EmployeeController {
   
@@ -14,11 +15,15 @@ class EmployeeController {
     
     return new Promise((resolve, reject) => {
       service.saveEmployee(employeeData, (error, data) => {
-        if (error) return reject(res.status(400).json({
+        if (error) {
+        logger.error("400 - Error Occured");
+        return reject(
+          res.status(400).json({
            success: false,
            message: "Error Occured",
            error
          }));
+        }
         resolve(res.status(201).json({
            success: true,
            message: "Employee Data has been save successfully",
@@ -45,6 +50,7 @@ class EmployeeController {
       try {
         service.getAllEmployee((error, employeeData) => {
           if (error) {
+            logger.error("400 - Error Occured getAllEmployee");
             return res.status(400).send({
               success: false,
               message: 'Error Occured'
@@ -57,6 +63,7 @@ class EmployeeController {
           });
         });
       } catch (error) {
+        logger.error(`500 - ${error.message}`);
         return res.send(500).send({
           success: false,
           message: error.message
@@ -68,6 +75,7 @@ class EmployeeController {
     const employeeId = req.params.employeeId;
     service.employeeById(employeeId, (error, data) => {
       if (error) {
+        logger.error("400 - Record not found in getEmployeeById");
         return res.status(400).send({
           success: false,
           message: 'Record not found'
@@ -96,6 +104,7 @@ class EmployeeController {
 
       service.updateEmployeeDetails(employeeId,updatedEmployeeData, (error,data) => {
          if (error) {
+          logger.error('400 - Please check for valid employee id in updateEmployeeDetail');
           return res.status(400).send({
             success: false,
             message: 'Please check for valid employee id'
@@ -108,6 +117,7 @@ class EmployeeController {
         } 
       });
     } catch (err) {
+      logger.error('500 - Internal server error found');
       res.status(500).send({
         success: false,
         message: 'Internal server error found'
@@ -120,6 +130,7 @@ class EmployeeController {
       const employeeId = req.params.employeeId;
       service.deleteEmployeeById(employeeId, (error, data) => {
         if (error) {
+          logger.error('400 - Please check for valid employee id in deleteEmployeeById');
           return res.status(400).send({
             success: false,
             message: 'Please check for valid employee id'
@@ -132,6 +143,7 @@ class EmployeeController {
         }
       });
     } catch (error) {
+      logger.error('500 - Internal server error found in deleteEmployeeById');
       return res.status(500).send({
         success: false,
         message: 'Internal server error found'

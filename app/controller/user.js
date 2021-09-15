@@ -15,6 +15,7 @@ class UserDataController {
 
     service.registerUser(userData, (error, data) => {
       if (error) {
+        logger.error(`409 - Duplicate Email Address Not Allowed`);
         return res.status(409).json({
           success: false,
           message: "Duplicate Email Address Not Allowed",
@@ -37,8 +38,8 @@ class UserDataController {
 
     service.loginUser(loginDetails, (error, data) => {
       if (error) {
-        logger.error(error);
-        return res.status(500).json({ success: false, message: error, data });
+        logger.error(`500 - error.message`);
+        return res.status(500).json({ success: false, message: error.message, data });
       } else {
         return res.status(200).json({
           success: true,
