@@ -1,9 +1,12 @@
 const joi = require("joi");
 
 const validation = joi.object({
-  name: joi.string().pattern(new RegExp("^[A-Z]{1}[a-zA-Z\\s]{2,}$")).required(),
+  name: joi
+    .string()
+    .pattern(new RegExp("^[A-Z]{1}[a-zA-Z\\s]{2,}$"))
+    .required(),
   gender: joi.any().valid("Male", "Female"),
-  department: joi.array().items(joi.string()),
+  department: joi.array().items(),
   salary: joi.string().required(),
   startDate: joi.string().required(),
 });
